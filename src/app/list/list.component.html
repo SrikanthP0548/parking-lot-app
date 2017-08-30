@@ -1,0 +1,33 @@
+<app-header></app-header>
+
+<div class="row">
+  <div class="col-sm-10 mx-auto mt-5">
+    <div class="card mx-auto mt-5">
+      <div class="card-body mt-3">
+        <table class="table">
+          <thead class="thead-inverse" border="1">
+            <tr>
+              <th>Entry #</th>
+              <th>Vehicle Number</th>
+              <th>Entry Time</th>
+              <th>Exit Time</th>
+              <th>Paid Amount</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let vehicle of vehiclesList">
+              <th scope="row">{{ vehicle.entryId }}</th>
+              <td>{{ vehicle.vehicleNumber }}</td>
+              <td>{{ vehicle.entryTime }}</td>
+              <td>{{ vehicle.exitTime }}</td>
+              <td>{{ vehicle.paidAmount }}</td>
+            </tr>
+          </tbody>
+        </table>
+        <footer>
+          Total Collection Till Date : Total
+        </footer>
+      </div>
+    </div>
+  </div>
+</div>

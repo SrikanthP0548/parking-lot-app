@@ -1,0 +1,24 @@
+<app-header></app-header>
+
+<div class="row">
+  <div class="col-sm-6 mx-auto mt-5">
+    <div class="card mx-auto mt-5">
+      <div class="card-body mt-3">
+        <ngb-tabset>
+          <ngb-tab>
+            <ng-template ngbTabTitle><b>Entry</b></ng-template>
+            <ng-template ngbTabContent>
+                 <app-entry></app-entry>
+            </ng-template>
+          </ngb-tab>
+          <ngb-tab>
+            <ng-template ngbTabTitle><b> Exit</b></ng-template>
+            <ng-template ngbTabContent>
+                 <app-exit></app-exit>
+            </ng-template>
+          </ngb-tab>
+        </ngb-tabset>
+      </div>
+    </div>
+  </div>
+</div>
