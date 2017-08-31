@@ -1,24 +1,42 @@
 <div class="container">
   <div class="col-sm-12 mx-auto mt-3">
     <div *ngIf="showForm">
-      <form>
+      <form [formGroup]="rForm">
         <div class="form-group row">
-          <label for="inputPassword3" class="col-sm-3 col-form-label">Entry #</label>
+          <label for="entrynumber" class="col-sm-3 col-form-label">Entry #</label>
           <div class="col-sm-6">
-            <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="{{ entrynumber }}" #entryId>
+            <input type="text" readonly 
+            class="form-control-plaintext" 
+            formControlName="entrynumber">
           </div>
         </div>
 
         <div class="form-group row">
-          <label for="inputEmail3" class="col-sm-3 col-form-label">Vehicle Number</label>
+          <label for="vehicleno" class="col-sm-3 col-form-label">Vehicle Number</label>
           <div class="col-sm-6">
-            <input type="email" class="form-control" id="inputEmail3" placeholder="Vehicle Number" #vehicleNumber>
+            <input type="text" 
+            class="form-control" 
+            formControlName ="vehicleNumber"
+            placeholder="Vehicle Number">
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="wheels" class="col-sm-3 col-form-label">No.Of Wheels</label>
+          <div class="col-lg-6">
+            <select class="custom-select d-block" formControlName="wheelsValid" required>
+              <option value="">Select No.of wheels</option>
+              <option value="Two Wheeler">Two</option>
+              <option value="Three Wheeler">Three</option>
+              <option value="Four Wheeler">Four</option>
+              <option value="Six Wheeler">> Four</option>
+            </select>
           </div>
         </div>
 
         <div class="form-group row">
           <div class="col-md-5 ml-auto">
-            <button type="button" (click)="onVehcileAdded()" class="btn btn-primary">Get Reciept</button>
+            <button type="button" class="btn btn-primary" (click)="onVehcileAdded(rForm.value)" [disabled]="!rForm.valid">Get Reciept</button>
           </div>
         </div>
       </form>
@@ -33,10 +51,10 @@
         </div>
       </div>
       <div class="row">
-       <div class="col-sm-6 mt-4">
-        <b> Details</b>
-        <hr>
-      </div>
+        <div class="col-sm-6 mt-4">
+          <b> Details</b>
+          <hr>
+        </div>
       </div>
       <div class="row">
         <div class="col-sm-3">
@@ -49,15 +67,15 @@
       <div class="row">
         <div class="col-sm-3 clearflex">
           Vehicle No :
-          </div>
-          <div class="col-sm-3">
-            {{ vehicleid }}
-          </div>
-      </div> 
+        </div>
+        <div class="col-sm-3">
+          {{ vehicleid }}
+        </div>
+      </div>
       <div class="row">
         <div class="col-sm-9 ml-auto">
-          <button class="btn btn-success" (click) = "onShowForm()"> Another Vehicle </button>
-      </div>
+          <button class="btn btn-success" (click)="onShowForm()"> Another Vehicle </button>
+        </div>
       </div>
     </div>
   </div>

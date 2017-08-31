@@ -4,12 +4,14 @@ export class vehicle{
     private entryTime : Date;
     private exitTime : Date;
     private paidAmount : string;
+    private wheelsNo : string;
     
-    constructor(entryId:number,vehicleNumber:string,entryTime:Date,exitTime:Date,paidAmount:string){
+    constructor(entryId:number,vehicleNumber:string,entryTime:Date,exitTime:Date,paidAmount:string,wheelsNo:string){
         this.entryId =entryId;
         this.vehicleNumber = vehicleNumber;
         this.entryTime = entryTime;
         this.exitTime = exitTime;
         this.paidAmount = paidAmount;
+        this.wheelsNo = wheelsNo;
     }
 }

@@ -9,9 +9,9 @@ export class VehicleListService {
   private vehcileList:vehicle[] = [];
   constructor() { }
 
-  addNewVehicle(entryId,vehicleNo){
+  addNewVehicle(entryId,vehicleNo,wheelsNum){
     console.log(entryId);
-    this.vehcileList.push(new vehicle(parseInt(entryId), vehicleNo,new Date(),null, "0"));
+    this.vehcileList.push(new vehicle(parseInt(entryId), vehicleNo,new Date(),null, "0",wheelsNum));
     this.listUpdated.emit(parseInt(entryId));
   }
 

@@ -4,7 +4,7 @@ import {
   OnInit,
   ViewChild,
   ElementRef } from '@angular/core';
-
+import { FormBuilder, FormGroup, Validators,FormControl } from '@angular/forms';
 @Component({
   selector: 'app-entry',
   templateUrl: './entry.component.html',
@@ -12,28 +12,41 @@ import {
 })
 
 export class EntryComponent implements OnInit {
-  entrynumber:number = 0;
+  entryNo:number = 0;
   vehicleid:string;
   showForm = true;
-  @ViewChild('entryId') entryId:ElementRef;
-  @ViewChild('vehicleNumber') vehicleNo:ElementRef;
+  wheelsNum :string;
   
-  constructor(private vlService:VehicleListService) { }
+  entryValid
+  vehicleValid
+  wheelsValid
+  rForm: FormGroup;
+  constructor(private vlService:VehicleListService,private fBuilder:FormBuilder) { 
+  }
 
   ngOnInit() {
-    this.vlService.listUpdated.subscribe(
+  this.vlService.listUpdated.subscribe(
      (e:number) =>{
        console.log(e);
-       this.entrynumber = e+1;
+       this.entryNo = e+1;
      }
    )
+  this.entryValid = new FormControl( this.entryNo , [Validators.required]);
+  this.vehicleValid = new FormControl(null,[Validators.required]);
+  this.wheelsValid = new FormControl(null,[Validators.required]);
+
+ this.rForm = this.fBuilder.group({
+      'entrynumber' : this.entryValid,
+      'vehicleNumber' : this.vehicleValid,
+      'wheelsValid' : this.wheelsValid
+    });
   }
   
-  onVehcileAdded(){
-   this.entrynumber = this.entryId.nativeElement.value;
-   this.vehicleid = this.vehicleNo.nativeElement.value;
-   this.vlService.addNewVehicle(this.entrynumber,this.vehicleid);
-  this.showForm = false;
+  onVehcileAdded(entryForm){
+    this.entryNo = entryForm.entrynumber;
+    this.vehicleid = entryForm.vehicleid;
+    this.vlService.addNewVehicle(entryForm.entrynumber,entryForm.vehicleNumber,entryForm.wheelsValid);
+    this.showForm = false;
   }
    
   onShowForm(){
