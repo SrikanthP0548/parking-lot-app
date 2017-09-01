@@ -12,40 +12,42 @@ import { FormBuilder, FormGroup, Validators,FormControl } from '@angular/forms';
 })
 
 export class EntryComponent implements OnInit {
-  entryNo:number = 0;
+  entryNo:number;
   vehicleid:string;
   showForm = true;
   wheelsNum :string;
+  entryTime:Date;
   
   entryValid
   vehicleValid
   wheelsValid
   rForm: FormGroup;
   constructor(private vlService:VehicleListService,private fBuilder:FormBuilder) { 
+    
   }
 
   ngOnInit() {
-  this.vlService.listUpdated.subscribe(
-     (e:number) =>{
-       console.log(e);
-       this.entryNo = e+1;
-     }
-   )
-  this.entryValid = new FormControl( this.entryNo , [Validators.required]);
-  this.vehicleValid = new FormControl(null,[Validators.required]);
-  this.wheelsValid = new FormControl(null,[Validators.required]);
-
- this.rForm = this.fBuilder.group({
-      'entrynumber' : this.entryValid,
+  this.entryNo = (this.vlService.getVehiclesList().length > 1) ? this.vlService.getVehiclesList().length+1:1;
+  this.resetFormGroup();
+   this.rForm = this.fBuilder.group({
       'vehicleNumber' : this.vehicleValid,
       'wheelsValid' : this.wheelsValid
     });
   }
+
+  resetFormGroup(){
+    this.vehicleValid = new FormControl(null,[Validators.required]);
+    this.wheelsValid = new FormControl(null,[Validators.required]);
+  }
   
   onVehcileAdded(entryForm){
-    this.entryNo = entryForm.entrynumber;
-    this.vehicleid = entryForm.vehicleid;
-    this.vlService.addNewVehicle(entryForm.entrynumber,entryForm.vehicleNumber,entryForm.wheelsValid);
+    this.vehicleid = entryForm.vehicleNumber;
+    this.wheelsNum = entryForm.wheelsValid;
+    this.entryTime = new Date();
+    this.vlService.addNewVehicle(this.entryNo,entryForm.vehicleNumber,entryForm.wheelsValid,this.entryTime);
+    console.log(this.entryNo);
+    this.entryNo = this.entryNo+1;
+    this.rForm.reset();
     this.showForm = false;
   }
    

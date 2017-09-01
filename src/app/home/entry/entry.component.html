@@ -2,12 +2,10 @@
   <div class="col-sm-12 mx-auto mt-3">
     <div *ngIf="showForm">
       <form [formGroup]="rForm">
-        <div class="form-group row">
+        <div class="form-group row has-success">
           <label for="entrynumber" class="col-sm-3 col-form-label">Entry #</label>
           <div class="col-sm-6">
-            <input type="text" readonly 
-            class="form-control-plaintext" 
-            formControlName="entrynumber">
+            <label for="entrynumber" class="col-sm-3 col-form-label">{{ entryNo}}</label>
           </div>
         </div>
 
@@ -25,8 +23,7 @@
           <label for="wheels" class="col-sm-3 col-form-label">No.Of Wheels</label>
           <div class="col-lg-6">
             <select class="custom-select d-block" formControlName="wheelsValid" required>
-              <option value="">Select No.of wheels</option>
-              <option value="Two Wheeler">Two</option>
+               <option value="Two Wheeler">Two</option>
               <option value="Three Wheeler">Three</option>
               <option value="Four Wheeler">Four</option>
               <option value="Six Wheeler">> Four</option>
@@ -51,7 +48,7 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-sm-6 mt-4">
+        <div class="col-sm-9 mt-4">
           <b> Details</b>
           <hr>
         </div>
@@ -61,7 +58,7 @@
           Entry # :
         </div>
         <div class="col-sm-3">
-          {{ entrynumber }}
+          {{ entryNo-1 }}
         </div>
       </div>
       <div class="row">
@@ -73,7 +70,23 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-sm-9 ml-auto">
+        <div class="col-sm-3 clearflex">
+          No.Of Wheels :
+        </div>
+        <div class="col-sm-3">
+          {{ this.wheelsNum }}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-3">
+          Entry Time :
+        </div>
+        <div class="col-sm-6">
+          {{ entryTime }}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-9 ml-auto mt-3">
           <button class="btn btn-success" (click)="onShowForm()"> Another Vehicle </button>
         </div>
       </div>
